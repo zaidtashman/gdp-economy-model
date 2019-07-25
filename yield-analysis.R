@@ -1,5 +1,6 @@
 require(ggplot2)
 require(plotly)
+require(rstan)
 source('multiplot.R')
 
 from = tolower(c("Aug-1929","May-1937","Feb-1945","Nov-1948","Jul-1953","Aug-1957","Apr-1960","Dec-1969","Nov-1973","Jan-1980","Jul-1981","Jul-1990","Mar-2001","Dec-2007"))
@@ -29,7 +30,7 @@ p[[2]] = ggplot() +
   xlim(min(yield$date),max(yield$date))
 multiplot(plotlist = p, cols = 1)
 
-short = c('m1', 'm2', 'm3', 'm6', 'y1', 'y2', 'y3')
+short = c('m3', 'm6', 'y1', 'y2', 'y3')
 long = c('y7', 'y10', 'y20', 'y30')
 
 i = 1
@@ -45,7 +46,7 @@ for (s in short){
     i = i +1
   }
 }
-multiplot(plotlist = p, cols = 7)
+multiplot(plotlist = p, cols = 5)
 
 i = 1
 for (s in short){
@@ -60,4 +61,6 @@ for (s in short){
     i = i +1
   }
 }
-multiplot(plotlist = p, cols = 7)
+multiplot(plotlist = p, cols = 5)
+
+stan_model('varying-coefs-model.stan')
